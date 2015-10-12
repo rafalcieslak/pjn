@@ -6,7 +6,7 @@
 
 bool MWord::IsBeginning() const{
   if(word.length() == 0) return false;
-  std::string firstchar = UTF8::substr(word,0,1);
+  utf8char firstchar = word.substr(0,1);
   if(firstchar.length() == 1 && !isalnum(firstchar[0])) return false;
   // if(firstchar.length() == 2){
   //   std::cout << "Oh, what a fancy character: " << firstchar << std::endl;
@@ -62,15 +62,14 @@ void Words::Init(){
     std::string word1, word2;
     while(file >> n >> word1 >> word2){
       count++;
-      const MWord* mw1 = words[word1];
-      const MWord* mw2 = words[word2];
-      if(mw1 == nullptr || mw2 == nullptr) // word not considered as a 1gram
-	continue;
 
-      auto it = gram2Conts.find(mw1);
+      const MWord* mw2 = words[word2];
+      if(mw2 == nullptr) continue;
+      
+      auto it = gram2Conts.find(word1);
       if(it == gram2Conts.end()){
-	gram2Conts[mw1] = ContList();
-	it = gram2Conts.find(mw1);
+	gram2Conts[word1] = ContList();
+	it = gram2Conts.find(word1);
       }
       it->second.total += n;
       it->second.list.push_back({n,mw2});
@@ -92,16 +91,14 @@ void Words::Init(){
     std::string word1, word2, word3;
     while(file >> n >> word1 >> word2 >> word3){
       count++;
-      const MWord* mw1 = words[word1];
-      const MWord* mw2 = words[word2];
-      const MWord* mw3 = words[word3];
-      if(mw1 == nullptr || mw2 == nullptr || mw3 == nullptr) // words not considered as 1gram
-	continue;
 
-      auto it = gram3Conts.find({mw1,mw2});
+      const MWord* mw3 = words[word3];
+      if(mw3 == nullptr) continue;
+      
+      auto it = gram3Conts.find({word1,word2});
       if(it == gram3Conts.end()){
-	gram3Conts[{mw1,mw2}] = ContList();
-	it = gram3Conts.find({mw1,mw2});
+	gram3Conts[{word1,word2}] = ContList();
+	it = gram3Conts.find({word1,word2});
       }
       it->second.total += n;
       it->second.list.push_back({n,mw3});
@@ -112,45 +109,45 @@ void Words::Init(){
   
 }
 
-const MWord* Words::GetRandomSentenceBeg(bool proportional){
-  if(total_sentence_begs == 0) return nullptr;
+MWord Words::GetRandomSentenceBeg(bool proportional){
+  if(total_sentence_begs == 0) return "";
   if(proportional){
     int q = rand()%total_sentence_begs;
     for(const auto& pair : sentence_begs){
       q -= pair.first;
-      if(q <= 0) return pair.second;
+      if(q <= 0) return * pair.second;
     }
   }else{
     int q = rand()%(sentence_begs.size());
-    return sentence_begs[q].second;
+    return *sentence_begs[q].second;
   }
 }
 
-const MWord* Words::GetRandom1Gram(bool proportional){
-  if(total_1grams_amt == 0) return nullptr;
+MWord Words::GetRandom1Gram(bool proportional){
+  if(total_1grams_amt == 0) return "";
   if(proportional){
     int q = rand()%total_1grams_amt;
     for(const auto& pair : grams1){
       q -= pair.first;
-      if(q <= 0) return pair.second;
+      if(q <= 0) return *pair.second;
     }
   }else{
     int q = rand()%(grams1.size());
-    return grams1[q].second;
+    return *grams1[q].second;
   }
 }
 
-const MWord* Words::ContList::GetRandom(bool proportional){
-  if(total == 0) return nullptr;
+MWord Words::ContList::GetRandom(bool proportional){
+  if(total == 0) return "";
   if(proportional){
     int q = rand()%total;
     for(const auto& pair : list){
       q -= pair.first;
-      if(q <= 0) return pair.second;
+      if(q <= 0) return *pair.second;
     }
   }else{
     int q = rand()%(list.size());
-    return list[q].second;
+    return *list[q].second;
   }
 }
 

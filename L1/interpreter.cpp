@@ -37,16 +37,42 @@ void Interpreter::Run(){
   }
 }
 
+void Interpreter::Left(){
+  int n = buffer.length();
+  if(n >= 1){
+    utf8char last = buffer.split().back();
+    buffer = buffer.substr(0,n-1);
+    tail = last + tail;
+  }
+}
+void Interpreter::Right(){
+  int n = tail.length();
+  if(n >= 1){
+    utf8char last = tail.split().front();
+    tail = tail.substr(1,n-1);
+    buffer = buffer + last;
+  }
+}
+void Interpreter::Down(){
+
+}
+void Interpreter::Up(){
+
+}
+
 void Interpreter::Prompt(){
     
   buffer = "";
+  tail = "";
   while(1){
     std::cout << (char)27 << "[2K" << std::flush;
+    std::cout << "\r";
+    std::cout << " > " << buffer << tail;
     std::cout << "\r";
     std::cout << " > " << buffer;
     std::cout << std::flush;
 
-    std::string c = UTF8::getch();
+    utf8char c = UTF8::getch();
     if(c.length() == 0){
       
     }else if(UTF8::isgraph(c)){
@@ -56,8 +82,8 @@ void Interpreter::Prompt(){
       
     }else if(c[0] == '\b' || c[0] == 127){
       // backspace
-      if(UTF8::strlen(buffer) >= 1)
-	buffer = UTF8::substr(buffer,0,UTF8::strlen(buffer)-1);
+      if(buffer.length() >= 1)
+	buffer = buffer.substr(0,buffer.length()-1);
       
     }else if(c[0] == ' '){
       // space
@@ -70,9 +96,9 @@ void Interpreter::Prompt(){
       if(v.size() < 1) return; // empty command
       std::list<CommandEntry> matches;
       std::string query = v[0];
-      int n = UTF8::strlen(query);
+      int n = query.length();
       for(CommandEntry ce : command_list){
-	if(UTF8::substr(ce.command, 0, n) == query)
+	if(ce.command.substr(0, n) == query)
 	  matches.push_back(ce);
       }
       if(matches.size() == 0){
@@ -94,6 +120,21 @@ void Interpreter::Prompt(){
       std::cout << (char)27 << "[2K" << "\r > quit" << std::endl;
       quit = true;
       return;
+    }
+    else if(c[0] == 2) Left(); // C-B
+    else if(c[0] == 6) Right(); // C-F
+    else if(c[0] == 16) Up(); // C-P
+    else if(c[0] == 14) Down(); // C-N
+    else if(c[0] == 27){
+      // escape
+      char c2 = getch();
+      if(c2 == '['){
+	char c3 = getch();
+	if(c3 == 'A') Up();
+	else if(c3 == 'B') Down();
+        else if(c3 == 'C') Right();
+        else if(c3 == 'D') Left();
+      };
     }else{
       std::cout << "Unrecognized character " << c << "!" << std::endl;
     }
@@ -103,7 +144,7 @@ void Interpreter::Prompt(){
 std::vector<std::string> Interpreter::GetWordList(){
   std::vector<std::string> res;
   std::string curr;
-  for(std::string c : UTF8::split(buffer)){
+  for(std::string c : (buffer + tail).split()){
     if(UTF8::isgraph(c)) curr+=c;
     else if(c.length() == 0) {}
     else if(isspace(c[0]) && curr != ""){

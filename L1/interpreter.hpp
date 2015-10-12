@@ -6,6 +6,7 @@
 #include <list>
 #include <vector>
 #include <iostream>
+#include "utf8.hpp"
 
 template <typename T>
 inline void ConvertFromStr(std::string, T&) {
@@ -48,10 +49,10 @@ private:
 	    [f](std::vector<std::string> tail, Args... args){
 	First x;
 	if(tail.size() > 0){
-	  ConvertFromStr<First>(tail.back(), x);
-	  //tail.erase(tail.begin());
-	  tail.pop_back();
-	  f(tail,x,args...);
+	  ConvertFromStr<First>(tail.front(), x);
+	  tail.erase(tail.begin());
+	  //tail.pop_back();
+	  f(tail,args...,x);
 	}else{
 	  std::cout << "Not enough args" << std::endl;
 	}
@@ -69,7 +70,13 @@ private:
   };
   std::list<CommandEntry> command_list;
 
-  std::string buffer;
+  void Left();
+  void Right();
+  void Up();
+  void Down();
+  
+  utf8string buffer;
+  utf8string tail;
 
   bool quit = false;
 };

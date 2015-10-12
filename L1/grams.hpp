@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include "utf8.hpp"
 
 namespace std{
 template <typename T, typename U>
@@ -15,10 +16,10 @@ struct hash<std::pair<T,U> > {
 };
 }
 
-struct MWord{
-  MWord(std::string w) : word(w) {}
-  std::string word;
-  operator std::string(){return word;}
+struct MWord : public utf8string{
+  MWord() : utf8string() {}
+  MWord(const std::string& str) : utf8string(str) {}
+  MWord(const char* str) : utf8string(str) {}
   bool IsBeginning() const;
   bool IsEnding() const;
 };
@@ -34,21 +35,21 @@ public:
   
   std::vector<std::pair<int,const MWord*>> grams1;
   int total_1grams_amt = 0;
-  const MWord* GetRandom1Gram(bool proportional = true);
+  MWord GetRandom1Gram(bool proportional = true);
 
   int total_sentence_begs = 0;
   std::vector<std::pair<int,const MWord*>> sentence_begs;
-  const MWord* GetRandomSentenceBeg(bool proportional = true);
+  MWord GetRandomSentenceBeg(bool proportional = true);
 
   struct ContList{
     ContList(){}
     int total = 0;
     std::vector<std::pair<int, const MWord*>> list;
-    const MWord* GetRandom(bool proportional = true);
+    MWord GetRandom(bool proportional = true);
   };
 
-  std::unordered_map<const MWord*, ContList> gram2Conts;
-  std::unordered_map<std::pair<const MWord*, const MWord*>, ContList> gram3Conts;
+  std::unordered_map<std::string, ContList> gram2Conts;
+  std::unordered_map<std::pair<std::string, std::string>, ContList> gram3Conts;
 };
 
 #endif // __GRAMS_HPP__
