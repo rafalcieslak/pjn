@@ -24,7 +24,6 @@ struct MWord : public utf8string{
   bool IsEnding() const;
 };
 
-
 class Words{
 public:
 
@@ -49,7 +48,9 @@ public:
   };
 
   std::unordered_map<std::string, ContList> gram2Conts;
-  std::unordered_map<std::pair<std::string, std::string>, ContList> gram3Conts;
+  std::unordered_map<std::pair<utf8string, utf8string>, ContList> gram3Conts;
+
+  void Grade(std::vector<utf8string> sentence);
 };
 
 #endif // __GRAMS_HPP__

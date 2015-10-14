@@ -27,6 +27,7 @@ public:
   utf8string substr(int start, int leng = INT_MAX) const;
   int length() const;
   std::vector<utf8char> split() const;
+  std::vector<utf8string> words() const;
 };
 
 inline utf8string operator+(utf8char c, utf8string s) {

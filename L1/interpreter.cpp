@@ -142,16 +142,5 @@ void Interpreter::Prompt(){
 }
 
 std::vector<std::string> Interpreter::GetWordList(){
-  std::vector<std::string> res;
-  std::string curr;
-  for(std::string c : (buffer + tail).split()){
-    if(UTF8::isgraph(c)) curr+=c;
-    else if(c.length() == 0) {}
-    else if(isspace(c[0]) && curr != ""){
-      res.push_back(curr);
-      curr = "";
-    }
-  }
-  if(curr != "") res.push_back(curr);
-  return res;
+  return (buffer+tail).words();
 }
