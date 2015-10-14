@@ -30,6 +30,17 @@ public:
   std::vector<utf8string> words() const;
 };
 
+namespace std{
+template<>
+struct hash<utf8string>{
+  std::size_t operator()(const utf8string& str) const{
+    hash<std::string> hs;
+    return hs(str);
+  }
+};
+
+}
+
 inline utf8string operator+(utf8char c, utf8string s) {
   return utf8string(c + s.str());
 }

@@ -141,7 +141,7 @@ std::string UTF8::uppercase_first(const std::string& str){
 
 std::vector<utf8string> utf8string::words() const{
   std::vector<utf8string> res;
-  std::utf8string curr;
+  utf8string curr;
   for(std::string c : split()){
     if(UTF8::isgraph(c)) curr+=c;
     else if(c.length() == 0) {}

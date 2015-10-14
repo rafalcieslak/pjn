@@ -142,5 +142,8 @@ void Interpreter::Prompt(){
 }
 
 std::vector<std::string> Interpreter::GetWordList(){
-  return (buffer+tail).words();
+  auto v = (buffer+tail).words();
+  std::vector<std::string> q;
+  for(auto s : v) q.push_back(s);
+  return q;
 }
