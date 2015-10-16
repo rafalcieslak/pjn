@@ -13,6 +13,13 @@ void hello(){
   std::cout << "Hello!" << std::endl;
 }
 
+void PrintPermutations(){
+  std::string sentence;
+  std::cout << "Please enter a sentence:" << std::endl;
+  std::getline(std::cin, sentence);
+  utf8string s = sentence;
+}
+
 void PrintContinuations(std::string word){
   // std::string word = "teraz";
   Words::ContList& gc = w.gram2Conts[word];
@@ -91,5 +98,6 @@ int main(){
   i.AddCommandArgs<int>("proportional","Enables/disables proportional mode (0/1)",SetProportional);
   i.AddCommand("sentence","Generates a random sentence.",PrintSentence);
   i.AddCommandArgs<int>("level","Sets the maximum n for ngrams that should be used while generating sentences.",[](int n){max_level = n;});
+  i.AddCommand("permutations", "Prints a list of all possible word permutations from a sentence.",PrintPermutations);
   i.Run();
 }
