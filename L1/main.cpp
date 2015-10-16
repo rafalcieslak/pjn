@@ -88,11 +88,14 @@ void PrintSentence(){
   std::cout << Sentence() << std::endl;
 }
 
+void GradeSentence(){
+  std::cout << "Please provide a sentence to grade." << std::endl;
+}
+
 int main(){
   std::srand(std::time(0));
   w.Init();
   Interpreter i;
-  i.AddCommand("hello","Greeeting",hello);
   i.AddCommandArgs<std::string,std::string>("find3","Lists possible continuations for a given word, by most frequent 3grams. Requires 2 words as arguments.", PrintContinuations3);
   i.AddCommandArgs<std::string>("find2","Lists possible continuations for a given word, by most frequent 2grams. Requires 1 word as argument.", PrintContinuations);
   i.AddCommandArgs<int>("proportional","Enables/disables proportional mode (0/1)",SetProportional);

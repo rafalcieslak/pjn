@@ -81,8 +81,4 @@ private:
   bool quit = false;
 };
 
-
-
-
-
 #endif //__INTERPRETER_HPP__

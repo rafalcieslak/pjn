@@ -138,3 +138,18 @@ std::string UTF8::uppercase_first(const std::string& str){
   }
   return str;
 }
+
+std::vector<utf8string> utf8string::words() const{
+  std::vector<utf8string> res;
+  utf8string curr;
+  for(std::string c : split()){
+    if(UTF8::isgraph(c)) curr+=c;
+    else if(c.length() == 0) {}
+    else if(isspace(c[0]) && curr != ""){
+      res.push_back(curr);
+      curr = "";
+    }
+  }
+  if(curr != "") res.push_back(curr);
+  return res;
+}
