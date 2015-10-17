@@ -90,9 +90,32 @@ int utf8string::length() const
   return q;
 }
 
+const utf8char utf8string::operator[](int n) const{
+  int c,i,ix,count;
+  if(n < 0) return *((const utf8char*)nullptr); //UB
+
+  for (count=0, i=0, ix=word.length(); i < ix; )
+  {
+    c = (unsigned char) word[i];
+    int l = 0;
+    if      (c>=0   && c<=127) l=1;
+    else if ((c & 0xE0) == 0xC0) l=2;
+    else if ((c & 0xF0) == 0xE0) l=3;
+    else if ((c & 0xF8) == 0xF0) l=4;
+    //else if (($c & 0xFC) == 0xF8) l=4; // 111110bb //byte 5, unnecessary in 4 byte UTF-8
+    //else if (($c & 0xFE) == 0xFC) l=5; // 1111110b //byte 6, unnecessary in 4 byte UTF-8
+    utf8char current_char = word.substr(i,l);
+    if(count == n) return current_char;
+    i+= l;
+    count++;
+  }
+
+  return *((const utf8char*)nullptr); //UB
+}
+
 std::vector<utf8char> utf8string::split() const {
   std::vector<utf8char> res;
-  int c,i,ix,q;
+  int c,i,ix;
   for (i=0, ix=word.length(); i < ix; )
     {
       c = (unsigned char) word[i];
@@ -152,4 +175,11 @@ std::vector<utf8string> utf8string::words() const{
   }
   if(curr != "") res.push_back(curr);
   return res;
+}
+
+bool utf8string::isSentenceEnding() const{
+  utf8char last = split().back();
+  if(last == "." || last == "?" || last == "!") return true;
+  // other cases?
+  return false;
 }

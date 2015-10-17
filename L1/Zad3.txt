@@ -1,0 +1,38 @@
+Zdanie 1
+
+Dobre przykłady:
+
+Judyta dała wczoraj Stefanowi czekoladki.
+Wczoraj Judyta dała Stefanowi czekoladki.
+Wczoraj dała Judyta czekoladki Stefanowi.
+Czekoladki Judyta dała wczoraj Stefanowi.
+Judyta Stefanowi dała wczoraj czekoladki.
+Judyta dała czekoladki Stefanowi wczoraj.
+
+Złe przykłady:
+
+Dała wczoraj czekoladki Stefanowi Judyta.
+Czekoladki Stefanowi Judyta wczoraj dała.
+Wczoraj czekoladki dała Stefanowi Judyta.
+Dała czekoladki Judyta Stefanowi wczoraj.
+Czekoladki dała Judyta wczoraj Stefanowi.
+
+
+Zdanie 2
+
+Dobre przykłady:
+
+Dwa rogate koziołki babuleńka miała.
+Rogate koziołki dwa babuleńka miała.
+Babuleńka miała rogate koziołki dwa.
+Rogate koziołki miała babuleńka dwa.
+Koziołki rogate miała babuleńka dwa.
+Dwa miała rogate koziołki babuleńka.
+
+Złe przykłady:
+
+Koziołki babuleńka miała rogate dwa.
+Dwa miała rogate babuleńka koziołki.
+Babuleńka koziołki miała dwa rogate.
+Miała rogate koziołki dwa babuleńka.
+Rogate babuleńka dwa miała koziołki.

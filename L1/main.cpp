@@ -1,13 +1,17 @@
 #include "interpreter.hpp"
-#include "grams.hpp"
 #include "utf8.hpp"
+#include "grams2.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
+#include <unordered_map>
+#include "tuple_hash.hpp"
 
-Words w;
 bool proportional = true;
 int max_level = 3;
+int limit = 1000000;
+unsigned int min_occ1 = 2, min_occ2 = 3, min_occ3 = 2;
 
 void hello(){
   std::cout << "Hello!" << std::endl;
@@ -18,89 +22,141 @@ void PrintPermutations(){
   std::cout << "Please enter a sentence:" << std::endl;
   std::getline(std::cin, sentence);
   utf8string s = sentence;
+  std::vector<utf8string> v = s.words();
+  std::sort(v.begin(), v.end());
+  do{
+    for(auto word : v){
+      std::cout << word << " ";
+    }
+    std::cout << std::endl;
+  }while(std::next_permutation(v.begin(), v.end()));
 }
 
-void PrintContinuations(std::string word){
-  // std::string word = "teraz";
-  Words::ContList& gc = w.gram2Conts[word];
-  std::cout << "Word: \"" << word << "\", total = " << gc.total << std::endl;
-  for(auto it = gc.list.rbegin(); it != gc.list.rend(); it++){
-    std::cout << it->first << "\t" << *(it->second) << std::endl;
-  }
+void PrintConfig(){
+  std::cout << "limit = " << limit << std::endl;
+  std::cout << "proportional = " << proportional << std::endl;
+  std::cout << "level = " << max_level << std::endl;
+  std::cout << "minocc = " << min_occ1 << " " << min_occ2 << " " << min_occ3 << std::endl;
 }
 
-void PrintContinuations3(std::string word1, std::string word2){
-  Words::ContList& gc = w.gram3Conts[{word1,word2}];
-  std::cout << "Words: \"" << word1 << " + " << word2 << "\", Total = " << gc.total << std::endl;
-  for(auto it = gc.list.rbegin(); it != gc.list.rend(); it++){
-    std::cout << it->first << "\t" << *(it->second) << std::endl;
-  }  
-}
-
-void EchoNum(int x){
-  std::cout << x << std::endl;
-}
-
-void SetProportional(int p){
-  proportional = p;
-}
-
-std::string Sentence(){
-  std::string result;
-  MWord word = w.GetRandomSentenceBeg(proportional);
-  result += UTF8::uppercase_first(word) + " ";
+void Sentence(){
+  utf8string word = Words2::Query1Grams("*",limit,min_occ1).GetRandom(proportional)[0];
+  std::cout << UTF8::uppercase_first(word) << " " << std::flush;
   int count = 1;
-  MWord last2 = "", last1 = "";
+  utf8string last2 = "", last1 = "";
   while(1){
     last2 = last1;
     last1 = word;
     word = "";
 
     if(max_level >= 3 && word == "" && last2 != ""){
-      auto it = w.gram3Conts.find({last2,last1});
-      if(it != w.gram3Conts.end())
-	word = it->second.GetRandom(proportional);
+      auto r = Words2::Query3Grams(last2, last1, "*", limit, min_occ3);
+      if(r.total != 0)
+	word = r.GetRandom(proportional).back();
     }
-    if(max_level >= 2 && word == ""){
-      auto it = w.gram2Conts.find(last1);
-      if(it != w.gram2Conts.end())
-	word = it->second.GetRandom(proportional);
+    if(max_level >= 2 && word == "" && last1 != ""){
+      auto r = Words2::Query2Grams(last1, "*", limit, min_occ2);
+      if(r.total != 0)
+	word = r.GetRandom(proportional).back();
     }
     if(word == ""){
-      word = w.GetRandom1Gram(proportional);
+      auto r = Words2::Query1Grams("*", limit, min_occ1);
+      if(r.total != 0)
+	word = r.GetRandom(proportional).back();
     }
     if(word == ""){
       // Still cannot find any word? Abort.
       break;
     }
-    result += word + " ";
-    if(word.IsEnding()) break;
+    std::cout << word << " " << std::flush;
+    if(word.isSentenceEnding()) break;
     count++;
     if(count > 100){
-      std::cout << "--- Sentence too long, breaking." << std::endl;
+      std::cout << "--- Sentence too long, breaking.";
       break;
     }
   }
-  return result;
+  std::cout << std::endl;
 }
 
-void PrintSentence(){
-  std::cout << Sentence() << std::endl;
+typedef std::tuple<utf8string> ts1;
+typedef std::tuple<utf8string,utf8string> ts2;
+typedef std::tuple<utf8string,utf8string,utf8string> ts3;
+
+static std::unordered_map<ts1,unsigned int> cache1;
+static std::unordered_map<ts2,unsigned int> cache2;
+static std::unordered_map<ts3,unsigned int> cache3;
+
+template <typename Key, typename Value>
+Value GetCached_i(Key key, std::unordered_map<Key,Value>& cache, std::function<Value(Key)> getter){
+  auto it = cache.find(key);
+  if(it == cache.end()){
+    Value val = getter(key);
+    cache[key] = val;
+    return val;
+  }else{
+    return it->second;
+  }
 }
 
-void GradeSentence(){
-  std::cout << "Please provide a sentence to grade." << std::endl;
+template <typename Key, typename Value, typename F>
+Value GetCached(Key key, std::unordered_map<Key,Value>& cache, F&& getter){
+  return GetCached_i(key, cache, std::function<Value(Key)>(getter));
+}
+
+double Analyse(std::vector<utf8string> sentence, bool verbose = false){
+  if(verbose) std::cout << "Analysing sentence." << std::endl;
+  int n = sentence.size();
+  if(verbose) std::cout << "Unigrams:" << std::endl;
+  unsigned int amt;
+  for(int i = 0; i < n; i++){
+    amt = GetCached(ts1(sentence[i]), cache1, [&](ts1 key){return Words2::Query1Grams(std::get<0>(key), limit, min_occ1).total;});
+    if(verbose) std::cout << amt << " " << std::flush;
+  }
+  if(verbose) std::cout << std::endl << "Bigrams:" << std::endl;
+  for(int i = 0; i < n-1; i++){
+    amt = GetCached(ts2(sentence[i],sentence[i+1]), cache2, [&](ts2 key){return Words2::Query2Grams(std::get<0>(key), std::get<1>(key), limit, min_occ2).total;});
+    if(verbose) std::cout << amt << " " << std::flush;
+  }
+  if(verbose) std::cout << std::endl << "Trigrams:" << std::endl;
+  for(int i = 0; i < n-2; i++){
+    amt = GetCached(ts3(sentence[i],sentence[i+1],sentence[i+2]), cache3, [&](ts3 key){return Words2::Query3Grams(std::get<0>(key), std::get<1>(key), std::get<2>(key), limit, min_occ3).total;});
+    if(verbose) std::cout << amt << " " << std::flush;
+  }
+  if(verbose) std::cout << std::endl;
+  return 0.0;
 }
 
 int main(){
   std::srand(std::time(0));
-  w.Init();
+
+  PrintConfig();
+  
   Interpreter i;
-  i.AddCommandArgs<std::string,std::string>("find3","Lists possible continuations for a given word, by most frequent 3grams. Requires 2 words as arguments.", PrintContinuations3);
-  i.AddCommandArgs<std::string>("find2","Lists possible continuations for a given word, by most frequent 2grams. Requires 1 word as argument.", PrintContinuations);
-  i.AddCommandArgs<int>("proportional","Enables/disables proportional mode (0/1)",SetProportional);
-  i.AddCommand("sentence","Generates a random sentence.",PrintSentence);
+  i.AddCommandArgs<int>("proportional","Enables/disables proportional mode (0/1)",[](int n){proportional = n;});
+  i.AddCommand("sentence","Generates a random sentence.",Sentence);
   i.AddCommandArgs<int>("level","Sets the maximum n for ngrams that should be used while generating sentences.",[](int n){max_level = n;});
   i.AddCommand("permutations", "Prints a list of all possible word permutations from a sentence.",PrintPermutations);
+  i.AddCommandArgs<int>("limit", "Sets the maximum number of results from a query.", [](int n){limit = n;});
+  i.AddCommandArgs<int,int,int>("minocc", "Sets the minumum number of occurences a gram needs to be even considered.", [](int a, int b, int c){min_occ1 = a; min_occ2 = b; min_occ3 = c;});
+  i.AddCommand("config","Prints current configuration.", PrintConfig);
+  i.AddCommandArgs<std::string>("query1","Searches through 1grams",[](std::string s){
+      Words2::Query1Grams(utf8string(s),limit,min_occ1).Print();
+  });
+  i.AddCommandArgs<std::string,std::string>("query2","Searches through 2grams",[](std::string s1, std::string s2){
+      Words2::Query2Grams(utf8string(s1),utf8string(s2),limit,min_occ2).Print();
+  }); 
+  i.AddCommandArgs<std::string,std::string,std::string>("query3","Searches through 3grams",[](std::string s1, std::string s2, std::string s3){
+      Words2::Query3Grams(utf8string(s1),utf8string(s2),utf8string(s3),limit,min_occ3).Print();
+  });   
+  i.AddCommand("analyse", "Analyzes grams taken from input sentence", [](){
+      std::string str;
+      std::cout << "Please enter a sentence to analyze." << std::endl;
+      std::getline(std::cin,str);
+      auto s = utf8string(str).words();
+      Analyse(s,true);
+  });
+  
   i.Run();
+  
 }
