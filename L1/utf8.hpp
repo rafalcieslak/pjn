@@ -38,6 +38,15 @@ public:
   bool isSentenceEnding() const;
 };
 
+inline utf8string JoinString(std::vector<utf8string> str, utf8char c = " "){
+  utf8string result;
+  for(unsigned int n = 0; n < str.size(); n++){
+    if(n != 0) result += c;
+    result += str[n];
+  }
+  return result;
+}
+
 namespace std{
 template<>
 struct hash<utf8string>{

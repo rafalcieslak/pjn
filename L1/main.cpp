@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
+#include <set>
 #include <unordered_map>
 #include "tuple_hash.hpp"
 
@@ -105,6 +106,7 @@ Value GetCached(Key key, std::unordered_map<Key,Value>& cache, F&& getter){
 }
 
 double Analyse(std::vector<utf8string> sentence, bool verbose = false){
+  double score = 0.0;
   if(verbose) std::cout << "Analysing sentence." << std::endl;
   int n = sentence.size();
   if(verbose) std::cout << "Unigrams:" << std::endl;
@@ -117,14 +119,40 @@ double Analyse(std::vector<utf8string> sentence, bool verbose = false){
   for(int i = 0; i < n-1; i++){
     amt = GetCached(ts2(sentence[i],sentence[i+1]), cache2, [&](ts2 key){return Words2::Query2Grams(std::get<0>(key), std::get<1>(key), limit, min_occ2).total;});
     if(verbose) std::cout << amt << " " << std::flush;
+    //if(i > 0 && i < n-2)
+      score += log((double)amt + 1.0);
   }
   if(verbose) std::cout << std::endl << "Trigrams:" << std::endl;
   for(int i = 0; i < n-2; i++){
     amt = GetCached(ts3(sentence[i],sentence[i+1],sentence[i+2]), cache3, [&](ts3 key){return Words2::Query3Grams(std::get<0>(key), std::get<1>(key), std::get<2>(key), limit, min_occ3).total;});
     if(verbose) std::cout << amt << " " << std::flush;
+    score += log((double)amt + 1.0);
   }
-  if(verbose) std::cout << std::endl;
-  return 0.0;
+  if(verbose) std::cout << std::endl << "Score: 1/N * exp( " << score << " )" << std::endl;
+  return score;
+}
+
+void Auto(std::vector<utf8string> v /*sentence*/){
+  std::sort(v.begin(), v.end());
+  int perms = tgamma(v.size() + 1);
+  int n = 1;
+  std::set<std::pair<double, utf8string>> results;
+  utf8string last;
+  double score = 0.0;
+  do{
+    std::cout  << "Analyzing sentence perutation " << n << "/" << perms << "... " << std::flush;
+    score = Analyse(v);
+    last = JoinString(v);
+    results.insert({score,last});
+    std::cout << "Result: sentence = \"" << last << "\", score = " << score << std::endl;
+    n++;
+  }while(std::next_permutation(v.begin(), v.end()));
+  std::cout << std::endl <<  " ==== RESULTS ==== " << std::endl;
+  for(auto it = results.rbegin(); it != results.rend(); it++){\
+    double score = it->first;
+    auto sentence = it->second;
+    std::cout << score << "\t" << sentence << std::endl;
+  }
 }
 
 int main(){
@@ -156,6 +184,13 @@ int main(){
       auto s = utf8string(str).words();
       Analyse(s,true);
   });
+  i.AddCommand("auto", "Automatically finds most/least probable sentence permutations", [](){
+      std::string str;
+      std::cout << "Please enter a sentence to analyze." << std::endl;
+      std::getline(std::cin,str);
+      auto s = utf8string(str).words();
+      Auto(s);
+    });
   
   i.Run();
   

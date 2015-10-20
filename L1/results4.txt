@@ -1,0 +1,125 @@
+Babuleńka miała dwa rogate koziołki.
+
+min_occ 1 1 1
+
+ ==== RESULTS ==== 
+14.9247	*eńka *ała dwa *ate *ołki   <= Oryginalne zdanie! super!
+13.3153	*ołki *eńka *ała dwa *ate
+13.264	*eńka *ała dwa *ołki *ate  +
+13.264	*ate *eńka *ała dwa *ołki
+12.9763	*eńka *ate *ała dwa *ołki
+12.9763	*ate *ała dwa *ołki *eńka
+11.929	*ate *ołki *eńka *ała dwa
+11.3955	*eńka *ała *ate dwa *ołki
+11.2359	*ała dwa *ate *ołki *eńka
+10.725	*ołki *ała dwa *ate *eńka
+10.725	*eńka *ołki *ała dwa *ate  -
+10.4205	*eńka dwa *ała *ate *ołki
+10.3196	*ołki *ate *eńka *ała dwa
+10.2969	dwa *ołki *eńka *ała *ate
+10.0319	*ołki *eńka *ate *ała dwa
+10.0319	*ołki *ate *ała dwa *eńka
+10.0319	*eńka *ołki *ate *ała dwa
+10.0319	*ate *ała dwa *eńka *ołki
+9.98322	*ate *ała *eńka dwa *ołki
+9.72735	dwa *ała *ate *ołki *eńka  +
+9.62642	*ała dwa *ate *eńka *ołki
+9.57512	*ała dwa *ołki *eńka *ate
+9.57512	*ała dwa *ołki *ate *eńka
+9.39266	*eńka dwa *ate *ała *ołki
+9.34137	dwa *ate *ała *eńka *ołki
+9.34137	*ołki dwa *ate *ała *eńka
+9.33873	*eńka *ate *ołki *ała dwa
+9.33873	*ate *ołki *ała dwa *eńka
+9.29008	dwa *ołki *ate *ała *eńka
+9.00822	dwa *ała *eńka *ate *ołki
+9.00822	*ate *ołki dwa *ała *eńka
+8.9872	dwa *ate *eńka *ała *ołki
+8.9872	*eńka *ała *ołki dwa *ate
+8.96188	dwa *eńka *ała *ate *ołki
+8.96188	*eńka *ała *ate *ołki dwa  +
+8.81106	*ołki *eńka dwa *ała *ate
+8.69951	dwa *ate *ała *ołki *eńka
+8.64822	dwa *ate *ołki *ała *eńka
+8.4974	*ołki *ate dwa *ała *eńka
+8.4974	*ate dwa *ała *eńka *ołki
+8.45105	*ołki *eńka *ała *ate dwa  -
+8.39976	*eńka dwa *ołki *ała *ate
+8.29405	dwa *ate *ołki *eńka *ała  +
+8.24276	*ała *eńka dwa *ate *ołki
+8.24012	*ała dwa *eńka *ate *ołki
+8.11791	dwa *ała *ate *eńka *ołki  -
+8.11791	*ołki dwa *ała *ate *eńka
+8.11791	*eńka *ołki dwa *ała *ate
+8.0861	*ate dwa *ołki *ała *eńka
+7.85554	*eńka *ate dwa *ała *ołki
+7.85554	*ate dwa *ała *ołki *eńka
+7.73193	*ołki *ała *eńka dwa *ate
+7.73193	*ate dwa *ołki *eńka *ała
+7.7293	*ołki *ała dwa *eńka *ate
+7.7293	*ate *eńka *ołki *ała dwa
+7.70661	dwa *ołki *ała *ate *eńka
+7.70661	*ała *ate dwa *ołki *eńka
+7.45008	*eńka dwa *ała *ołki *ate
+7.45008	*ate *eńka dwa *ała *ołki  -
+7.39879	dwa *ała *eńka *ołki *ate
+7.39879	*ołki dwa *ała *eńka *ate
+7.35244	*ołki dwa *eńka *ała *ate
+7.30115	*ała *ate *eńka dwa *ołki
+7.09008	*eńka *ała *ołki *ate dwa
+7.09008	*ołki *eńka dwa *ate *ała
+7.09008	*ate dwa *eńka *ała *ołki
+7.03878	*ołki *ate *ała *eńka dwa  +
+7.03878	*eńka dwa *ołki *ate *ała
+6.98749	dwa *ołki *ała *eńka *ate
+6.98749	*ała *eńka *ate dwa *ołki
+6.75693	dwa *ała *ołki *eńka *ate
+6.75693	dwa *ała *ołki *ate *eńka
+6.75693	*ate *ołki *eńka dwa *ała
+6.68461	*ołki dwa *ate *eńka *ała
+6.63332	dwa *ołki *ate *eńka *ała
+6.63068	*ała dwa *eńka *ołki *ate
+6.58203	*ała *eńka dwa *ołki *ate
+6.39693	*eńka dwa *ate *ołki *ała
+6.39693	*eńka *ołki dwa *ate *ała
+6.39693	*ate *ała *ołki *eńka dwa
+6.34564	dwa *ołki *eńka *ate *ała
+6.34564	*ate *ołki *ała *eńka dwa  +
+6.34564	*ate *ała *eńka *ołki dwa
+6.06379	*eńka *ate *ołki dwa *ała
+5.99146	dwa *eńka *ała *ołki *ate
+5.99146	*ała *ołki *eńka dwa *ate
+5.99146	*ate *eńka *ała *ołki dwa
+5.96615	*ała *ate *ołki *eńka dwa
+5.94017	*ała *eńka *ołki dwa *ate
+5.86079	*ołki *ała *ate dwa *eńka
+5.86079	*eńka *ołki *ała *ate dwa
+5.70378	dwa *eńka *ate *ała *ołki
+5.70378	*eńka *ate *ała *ołki dwa
+5.70378	*ate *ała *ołki dwa *eńka
+5.55296	*ołki *eńka *ate dwa *ała
+5.55296	*eńka *ołki *ate dwa *ała
+5.45532	*ołki *ała *ate *eńka dwa
+5.29832	*ała *ołki dwa *ate *eńka
+5.29832	*ate *ołki dwa *eńka *ała  +
+5.273	*ała *ate *ołki dwa *eńka  -
+5.14749	*ołki *ate *eńka dwa *ała
+5.14166	*ołki *ała *eńka *ate dwa
+5.14166	*eńka *ate dwa *ołki *ała
+4.78749	*ołki *ate dwa *eńka *ała
+4.76217	dwa *eńka *ołki *ała *ate
+4.76217	*ała *ate dwa *eńka *ołki
+4.7362	*ate *eńka dwa *ołki *ała
+4.55388	*ała *eńka *ate *ołki dwa
+4.45435	*ate *eńka *ołki dwa *ała
+4.09434	dwa *ate *eńka *ołki *ała
+4.04305	*ała *eńka *ołki *ate dwa
+3.66356	*ała *ate *eńka *ołki dwa
+3.4012	*ała *ołki *eńka *ate dwa
+3.4012	*ała *ołki *ate dwa *eńka
+3.4012	dwa *eńka *ołki *ate *ała
+3.4012	*ołki dwa *eńka *ate *ała
+2.99573	*ała *ołki *ate *eńka dwa
+2.70805	dwa *eńka *ate *ołki *ała
+2.30259	*ała *ołki dwa *eńka *ate
+2.19722	*ate dwa *eńka *ołki *ała

@@ -1,0 +1,123 @@
+Judyta dała wczoraj Stefanowi czekoladki.
+
+ ==== RESULTS ==== 
+20.6602	*yta *ała *aj *owi *adki <=== Oryginalne zdanie! super
+20.4922	*adki *owi *aj *ała *yta
+18.2623	*adki *yta *ała *aj *owi  +
+17.3766	*aj *owi *adki *ała *yta
+17.1963	*owi *aj *ała *yta *adki
+17.0582	*adki *ała *yta *aj *owi  - ?
+16.9243	*adki *owi *aj *yta *ała
+16.9036	*adki *ała *owi *aj *yta
+16.8216	*aj *ała *yta *owi *adki
+16.6527	*adki *ała *yta *owi *aj
+16.6466	*aj *yta *ała *owi *adki  +
+16.6367	*yta *ała *adki *owi *aj  +
+16.3516	*owi *adki *aj *ała *yta
+16.3366	*owi *aj *yta *ała *adki
+16.3006	*yta *ała *aj *adki *owi
+16.3006	*adki *owi *yta *ała *aj
+16.2012	*owi *adki *ała *aj *yta
+16.1562	*yta *aj *ała *owi *adki
+16.1547	*adki *owi *ała *aj *yta
+16.105	*yta *ała *owi *aj *adki
+16.105	*adki *yta *ała *owi *aj
+16.065	*yta *adki *ała *aj *owi
+16.065	*adki *ała *aj *owi *yta
+16.0332	*adki *aj *ała *yta *owi
+15.8827	*adki *ała *aj *yta *owi
+15.8726	*ała *yta *aj *owi *adki
+15.8582	*adki *aj *yta *ała *owi
+15.8461	*yta *owi *aj *ała *adki
+15.6437	*adki *aj *owi *ała *yta
+15.6401	*aj *ała *yta *adki *owi  +
+15.4027	*owi *adki *yta *ała *aj
+15.3557	*yta *ała *adki *aj *owi
+15.2849	*yta *owi *adki *ała *aj
+15.2603	*yta *ała *owi *adki *aj
+14.8794	*ała *aj *owi *adki *yta
+14.7804	*aj *yta *ała *adki *owi
+14.6971	*ała *aj *yta *owi *adki
+14.5733	*owi *aj *adki *ała *yta
+14.3544	*yta *adki *owi *aj *ała
+14.2899	*yta *aj *ała *adki *owi
+14.2856	*ała *yta *adki *owi *aj
+14.1986	*owi *adki *ała *yta *aj
+14.1521	*adki *owi *ała *yta *aj
+14.0767	*aj *ała *owi *adki *yta
+14.0343	*aj *owi *ała *yta *adki
+13.9078	*yta *adki *ała *owi *aj
+13.8516	*ała *adki *owi *aj *yta
+13.7667	*owi *aj *ała *adki *yta
+13.7583	*adki *yta *aj *ała *owi
+13.7463	*aj *owi *yta *ała *adki
+13.5156	*ała *aj *yta *adki *owi
+13.4361	*aj *owi *adki *yta *ała
+13.32	*ała *owi *aj *yta *adki
+13.3184	*yta *aj *owi *adki *ała
+13.2883	*yta *adki *aj *ała *owi
+13.2883	*adki *aj *ała *owi *yta
+13.1589	*yta *adki *owi *ała *aj
+13.138	*adki *yta *owi *aj *ała
+13.0692	*ała *yta *owi *aj *adki
+13.0048	*owi *yta *ała *aj *adki
+13.0047	*ała *yta *adki *aj *owi
+12.8588	*owi *ała *aj *yta *adki
+12.7838	*owi *adki *aj *yta *ała
+12.684	*yta *aj *owi *ała *adki
+12.6477	*adki *aj *owi *yta *ała
+12.4815	*ała *aj *owi *yta *adki
+12.4753	*ała *owi *adki *aj *yta
+12.2934	*yta *owi *adki *aj *ała
+12.2245	*ała *yta *owi *adki *aj
+12.2105	*aj *ała *adki *owi *yta
+12.0726	*aj *adki *owi *ała *yta
+12.0515	*aj *yta *adki *ała *owi
+11.9425	*yta *owi *ała *aj *adki  +
+11.9425	*adki *yta *owi *ała *aj
+11.8007	*aj *adki *ała *yta *owi
+11.6788	*aj *ała *owi *yta *adki
+11.5819	*adki *owi *yta *aj *ała  -
+11.513	*ała *yta *aj *adki *owi
+11.4313	*owi *aj *yta *adki *ała
+11.253	*aj *adki *yta *ała *owi
+11.1352	*yta *aj *adki *ała *owi
+11.1352	*adki *ała *owi *yta *aj
+11.0566	*aj *yta *owi *adki *ała
+10.9941	*owi *yta *aj *ała *adki
+10.9941	*aj *ała *adki *yta *owi
+10.8562	*owi *ała *yta *aj *adki
+10.8075	*owi *yta *adki *ała *aj
+10.6839	*owi *adki *yta *aj *ała
+10.6328	*owi *aj *adki *yta *ała
+10.6046	*aj *owi *ała *adki *yta
+10.5199	*ała *aj *adki *owi *yta  -
+10.515	*yta *owi *aj *adki *ała
+10.4223	*aj *yta *owi *ała *adki
+10.3862	*owi *ała *yta *adki *aj
+10.3243	*ała *owi *aj *adki *yta
+10.0982	*owi *yta *ała *adki *aj
+10.045	*ała *adki *yta *aj *owi
+9.97599	*adki *yta *aj *owi *ała
+9.95228	*owi *ała *adki *aj *yta
+9.94961	*ała *owi *adki *yta *aj
+9.86308	*owi *ała *aj *adki *yta
+9.63952	*ała *adki *yta *owi *aj  -
+9.57498	*ała *adki *aj *owi *yta
+9.50599	*yta *adki *aj *owi *ała
+9.39266	*ała *adki *aj *yta *owi
+9.32367	*adki *aj *yta *owi *ała
+9.30347	*ała *aj *adki *yta *owi
+9.07658	*aj *adki *owi *yta *ała
+9.05579	*aj *adki *ała *owi *yta  -
+9.03599	*yta *owi *ała *adki *aj
+8.93063	*aj *yta *adki *owi *ała
+8.84101	*aj *owi *yta *adki *ała
+8.08333	*ała *adki *owi *yta *aj
+8.01434	*yta *aj *adki *owi *ała
+7.81601	*owi *yta *adki *aj *ała
+7.55171	*ała *owi *yta *aj *adki
+7.42655	*owi *ała *adki *yta *aj
+7.08171	*ała *owi *yta *adki *aj
+5.66296	*owi *yta *aj *adki *ała
+4.7185	*aj *adki *yta *owi *ała

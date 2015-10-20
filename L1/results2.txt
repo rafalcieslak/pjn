@@ -1,0 +1,27 @@
+To jest przykładowe zdanie.
+
+ ==== RESULTS ==== 
+41.777	jest to *anie *owe
+39.6688	jest to *owe *anie
+39.5646	to jest *anie *owe
+39.2185	*owe jest to *anie
+38.5549	*anie to jest *owe
+38.1366	*anie jest to *owe
+37.63	*owe to jest *anie
+37.1451	to jest *owe *anie
+36.9314	*owe *anie to jest
+36.63	*owe *anie jest to
+35.1326	to *anie jest *owe
+35.033	to *owe *anie jest
+33.7957	*anie *owe jest to
+33.7602	to *anie *owe jest
+32.5913	*owe to *anie jest
+31.5317	to *owe jest *anie
+31.307	jest *owe *anie to
+31.0668	*anie *owe to jest
+30.2043	jest *anie *owe to
+29.5936	*owe jest *anie to
+28.4143	jest *anie to *owe
+27.7294	*anie to *owe jest
+26.1523	*anie jest *owe to
+25.3519	jest *owe to *anie

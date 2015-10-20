@@ -28,6 +28,7 @@ Babuleńka miała rogate koziołki dwa.
 Rogate koziołki miała babuleńka dwa.
 Koziołki rogate miała babuleńka dwa.
 Dwa miała rogate koziołki babuleńka.
+Babuleńka miała dwa koziołki rogate.
 
 Złe przykłady:
 
